@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 public class Lab_11_Listmaker {
     static void main() {
@@ -9,25 +10,26 @@ public class Lab_11_Listmaker {
      while(true) {
          IO.print(" A – Add an item to the list\n D – Delete an item from the list\n I – Insert an item into the list\n P – Print the list\n Q – Quit the program\n");
          String action = SafeInput.getRegExString(pipe, "What would you like to do with the list?", "[AaDdIiQqPp]");
+         action = action.toUpperCase();
 
          switch (action) {
 
-             case "A", "a":
+             case "A":
                  add(pipe, myArrList);
                  pipe.nextLine();
                  break;
-             case "D", "d":
+             case "D":
                  delete(pipe,myArrList);
                  pipe.nextLine();
                  break;
-             case "I", "i":
+             case "I":
                  insertItem(pipe,myArrList);
                  pipe.nextLine();
                  break;
-             case "P", "p":
+             case "P":
                  printList(pipe,myArrList);
                  break;
-             case "Q", "q":
+             case "Q":
                  quit(pipe,myArrList);
                  break;
          }
@@ -43,28 +45,24 @@ public class Lab_11_Listmaker {
     }
 
     public static void delete(Scanner pipe,ArrayList<String> myArrList) {
-        for (int i = 0; i < myArrList.size(); i++) {
-            System.out.println(i + " " + myArrList.get(i));
-        }
+        printList(pipe,myArrList);
         IO.print("What would you like to delete from the list?: ");
-        int response = pipe.nextInt();
+        int response = (pipe.nextInt() - 1);
         myArrList.remove(response);
     }
 
     public static void insertItem(Scanner pipe,ArrayList<String> myArrList) {
-        for (int i = 0; i < myArrList.size(); i++) {
-            System.out.println(i + " " + myArrList.get(i));
-        }
+        printList(pipe,myArrList);
         IO.print("Where would you like to add to the list?: ");
         int response = pipe.nextInt();
         IO.print("What would you like to add?: ");
         String wordResponse = pipe.next();
-        myArrList.add(response, wordResponse);
+        myArrList.add((response - 1), wordResponse);
     }
 
     public static void printList(Scanner pipe,ArrayList<String> myArrList) {
         for (int i = 0; i < myArrList.size(); i++) {
-            System.out.println(i + " " + myArrList.get(i));
+            System.out.println((i + 1) + " " + myArrList.get(i));
         }
         System.out.println();
     }
